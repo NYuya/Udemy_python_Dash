@@ -37,8 +37,7 @@ def write_data():
     date = datetime.datetime.today().strftime('%Y/%-m/%-d')
     subscribers = _results['n_subscribers']
     reviews = _results['n_reviews']
-    results = pd.DataFrame([[date, subscribers, reviews]], columns=[
-                           'date', 'subscribers', 'reviews'])
+    results = pd.DataFrame([[date, subscribers, reviews]], columns=['date', 'subscribers', 'reviews'])
 
     df = pd.concat([df, results])
     df.to_csv('assets/data.csv', index=False)
