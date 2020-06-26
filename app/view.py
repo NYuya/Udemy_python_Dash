@@ -52,15 +52,48 @@ app.layout = html.Div(children=[
                     xaxis=dict(title='date'),
                     yaxis=dict(title='受講生総数', side='left', showgrid=False,
                         range=[2500, max(n_subscribers)+100]),
-                    yaxis2=dict(title='増加人数', side='right', orverlaying='y', showgrid=False,
-                        range=[0, max(diff_subscribers[1:])])
+                    yaxis2=dict(title='増加人数',side='right',overlaying='y',
+                        showgrid=False, range=[0, max(diff_subscribers[1:])]),
+                    margin=dict(l=200, r=200, b=100, t=100)
+                )
+            }
+        ),
+        dcc.Graph(
+            id='review_graph',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=dates,
+                        y=n_reviews,
+                        mode='lines+markers',
+                        name='レビュー総数',
+                        opacity=0.7,
+                        yaxis='y1'
+                    ),
+                    go.Bar(
+                        x=dates,
+                        y=diff_reviews,
+                        name='増加数',
+                        yaxis='y2'
+                    )
+                ],
+                'layout': go.Layout(
+                    title='レビュー総数の推移',
+                    xaxis=dict(title='date'),
+                    yaxis=dict(title='レビュー総数', side='left', showgrid=False,
+                        range=[0, max(n_reviews)+10]),
+                    yaxis2=dict(title='増加数', side='right', overlaying='y',
+                        showgrid=False, range=[0, max(diff_reviews[1:])]),
+                    margin=dict(l=200, r=200, b=100, t=100)
                 )
             }
         )
     ])
-
-
-])
+], style={
+    'textAlign': 'center',
+    'width': '1200px',
+    'margin': '0 auto'
+})
 
 if __name__ == '__main__':
     app.run_server(debug=True)
