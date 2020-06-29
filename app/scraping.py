@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 
 from assets.database import db_session
 from assets.models import Data
-
 import datetime
 
 
